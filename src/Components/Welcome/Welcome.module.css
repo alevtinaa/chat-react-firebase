@@ -1,0 +1,38 @@
+:local(.container) {
+  height: 100vh;
+  text-align: center;
+  color: #fff;
+  font-size: 14pt;
+  box-sizing: border-box;
+  padding: 20vh 0;
+  background: linear-gradient(226deg, #3378a3, #d53bc2);
+  background-size: 400% 400%;
+  -webkit-animation: gradient-background 30s ease infinite;
+  -moz-animation: gradient-background 30s ease infinite;
+  -o-animation: gradient-background 30s ease infinite;
+  animation: gradient-background 30s ease infinite;
+}
+
+@-webkit-keyframes gradient-background {
+  0%{background-position:0% 94%}
+  50%{background-position:100% 7%}
+  100%{background-position:0% 94%}
+}
+
+@-moz-keyframes gradient-background {
+  0%{background-position:0% 94%}
+  50%{background-position:100% 7%}
+  100%{background-position:0% 94%}
+}
+
+@-o-keyframes gradient-background {
+    0%{background-position:0% 94%}
+    50%{background-position:100% 7%}
+    100%{background-position:0% 94%}
+}
+
+@keyframes gradient-background {
+  0%{background-position:0% 94%}
+  50%{background-position:100% 7%}
+  100%{background-position:0% 94%}
+}

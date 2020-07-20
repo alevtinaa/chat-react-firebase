@@ -1,17 +1,50 @@
-import React from 'react';
+import React, { Component, StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import firebase from './firebase.js';
+import {
+  Router,
+  Route,
+  Switch,
+  } from 'react-router-dom';
+import history from './history';
+import Welcome from './Components/Welcome/Welcome';
+import Login from './Components/Auth/Login';
+import Register from './Components/Auth/Register';
+import Home from './Components/Home/Home';
+
+class RoutedApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+    }
+  }
+
+  render() {
+    return (
+      <Router history={history}>
+        <Switch>
+          <Route
+            path='/'
+            exact
+            component={Welcome}
+            />
+          <Route
+            path='/home'
+            exact
+            component={Home}
+            />
+        </Switch>
+      </Router>
+    )
+  }
+};
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <RoutedApp
+      />
+  </StrictMode>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
