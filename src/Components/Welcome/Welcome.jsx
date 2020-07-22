@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Welcome.module.css';
+import firebase from '../../firebase.js';
 import AuthMessage from '../Auth/AuthMessage';
 import Login from '../Auth/Login';
 import Register from '../Auth/Register';
@@ -12,7 +13,11 @@ class Welcome extends Component {
     };
   }
 
-  clickHandler = type => {
+  componentDidUpdate() {
+    if (this.props.currentUser) this.props.history.push('/home');
+  }
+
+  linksClickHandler = type => {
     this.setState(
       {
         isShown: type,
@@ -23,16 +28,16 @@ class Welcome extends Component {
   contentGenerator = () => {
     switch (this.state.isShown) {
       case 'Login': return <Login
-        clickHandler={this.clickHandler}
+        clickHandler={this.linksClickHandler}
         history={this.props.history}
         />;
       case 'Register': return <Register
-        clickHandler={this.clickHandler}
+        clickHandler={this.linksClickHandler}
         history={this.props.history}
         />;
       case 'AuthMessage':
       default: return <AuthMessage
-        clickHandler={this.clickHandler}
+        clickHandler={this.linksClickHandler}
         />;
     }
   }

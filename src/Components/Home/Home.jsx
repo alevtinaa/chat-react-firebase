@@ -6,10 +6,16 @@ class Home extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    if (!this.props.currentUser) this.props.history.push('/')
+  }
+
   render() {
     return (
-      <div>
-        Home
+      <div
+        className={styles.container}
+        >
+        CHAT
       </div>
     )
   }

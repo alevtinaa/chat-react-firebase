@@ -36,7 +36,6 @@ class Login extends Component {
 
 	render() {
 		const {email, password, error} = this.state;
-    const props = this.props;
 
 		return (
 			<div
@@ -84,7 +83,7 @@ class Login extends Component {
             <span
               className={styles.link}
               onClick={
-                () => props.clickHandler('Register')
+                () => this.props.clickHandler('Register')
               }
               >
               Create an account.

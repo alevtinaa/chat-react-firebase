@@ -17,8 +17,19 @@ class RoutedApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      currentUser: null,
     }
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) this.setState(prevState => ({
+            ...prevState,
+            currentUser: user
+          })
+        )
+      }
+    );
   }
 
   render() {
@@ -28,12 +39,22 @@ class RoutedApp extends Component {
           <Route
             path='/'
             exact
-            component={Welcome}
+            render={
+              () => <Welcome
+                history={history}
+                currentUser={this.state.currentUser}
+                />
+              }
             />
           <Route
             path='/home'
             exact
-            component={Home}
+            render={
+              () => <Home
+                history={history}
+                currentUser={this.state.currentUser}
+                />
+              }
             />
         </Switch>
       </Router>
