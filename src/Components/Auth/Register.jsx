@@ -35,15 +35,25 @@ class Register extends Component{
       .auth()
 	    .createUserWithEmailAndPassword(email, password)
 	    .then(
-        () => {
-	       const user = firebase.auth().currentUser;
-	       user.updateProfile({displayName: username})
-      		  .then(() => this.props.history.push('/'))
-      		  .catch(err => this.setState({err}))
-          }
-        )
-      .catch(err => this.setState({err}))
-  };
+        user => {
+					const usersDatabase = firebase.database().ref(`users/${user.user.uid}`);
+	        const u = {
+	          uid: user.user.uid,
+	          email,
+	          username,
+	          name: '',
+	          photoURL: '',
+	          profileDescription: '',
+						registrationTimestamp: new Date().getTime(),
+	        };
+	        usersDatabase.set(u);
+					this.props.history.push('/');
+			  }
+			)
+			.catch(
+				error => this.setState({error})
+			)
+	};
 
 	render() {
 		const {email, username, password, error} = this.state;

@@ -18,18 +18,37 @@ class RoutedApp extends Component {
     super(props);
     this.state = {
       currentUser: null,
+      authStateChanged: false,
     }
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) this.setState(prevState => ({
-            ...prevState,
-            currentUser: user
-          })
-        )
-      }
-    );
+      if (user) {
+        const userDatabase = firebase.database().ref('users').child(user.uid);
+
+        userDatabase.on('value', snapshot => {
+
+          const snap = snapshot.val();
+
+          this.setState(prevState => (
+            {
+              ...prevState,
+              currentUser: snap,
+              authStateChanged: true,
+            }
+          ));
+        });
+      } else {
+          this.setState(prevState => (
+            {
+              ...prevState,
+              currentUser: null,
+              authStateChanged: true,
+            }
+          ));
+        }
+    });
   }
 
   render() {
@@ -40,17 +59,18 @@ class RoutedApp extends Component {
             path='/'
             exact
             render={
-              () => <Welcome
+              () => <Home
                 history={history}
                 currentUser={this.state.currentUser}
+                authStateChanged={this.state.authStateChanged}
                 />
               }
             />
           <Route
-            path='/home'
+            path='/signup'
             exact
             render={
-              () => <Home
+              () => <Welcome
                 history={history}
                 currentUser={this.state.currentUser}
                 />

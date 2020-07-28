@@ -4,6 +4,7 @@ import firebase from '../../firebase.js';
 import AuthMessage from '../Auth/AuthMessage';
 import Login from '../Auth/Login';
 import Register from '../Auth/Register';
+import Loader from '../Loader/Loader';
 
 class Welcome extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Welcome extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.currentUser) this.props.history.push('/home');
+    if (this.props.currentUser) this.props.history.push('/');
   }
 
   linksClickHandler = type => {
@@ -35,10 +36,10 @@ class Welcome extends Component {
         clickHandler={this.linksClickHandler}
         history={this.props.history}
         />;
-      case 'AuthMessage':
-      default: return <AuthMessage
+      case 'AuthMessage': return <AuthMessage
         clickHandler={this.linksClickHandler}
         />;
+      default: return <Loader />;
     }
   }
 
