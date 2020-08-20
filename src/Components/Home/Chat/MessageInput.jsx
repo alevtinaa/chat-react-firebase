@@ -35,6 +35,7 @@ class MessageInput extends Component {
           receiverId,
           timestamp: new Date().getTime(),
           messageText: this.state.messageText,
+          isRead: false,
         };
 
       chatsDatabase.push(message);

@@ -4,7 +4,7 @@ import firebase from '../../firebase';
 import Loader from '../Loader/Loader'
 import Navbar from './Navbar';
 import Chatlist from './Chat/Chatlist';
-import Chat from './Chat/Chat';
+import ChatPage from './Chat/ChatPage';
 
 class Home extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class Home extends Component {
               />
         {
           this.state.currentChatId &&
-            <Chat
+            <ChatPage
               currentChatId={this.state.currentChatId}
               currentUser={this.props.currentUser}
               receiverUser={this.state.receiverUser}

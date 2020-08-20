@@ -45,11 +45,27 @@
   display: flex;
   flex-flow: column;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 0px 0px 15px 0px;
+}
+
+:local(.chat button) {
+  width: 100%;
+  height: 50px;
+  background: lightgrey;
+  opacity: .5;
+  outline: none;
+  border: none;
+  transition: all .3s ease-in-out;
+}
+
+:local(.chat button:hover) {
+  opacity: 1;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
 }
 
 :local(.message) {
-  margin: 1vmin 0;
+  margin: 1vmin 15px;
   display: flex;
   flex-flow: row;
   flex-wrap: nowrap;
@@ -75,6 +91,15 @@
   box-sizing: border-box;
   padding: 1vmax;
   word-wrap: break-word;
+  white-space: pre-line;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+:local(.messageCloud .date) {
+  margin: 0 5px 0 10px;
+  font-size: 8pt;
+  color: lightgrey;
 }
 
 :local(.incomeMessage) {
