@@ -16,8 +16,7 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
-  background: linear-gradient(226deg, #3378a3, #8E55B4);
-  background-size: 200% 200%;
+  background: #3378a3;
   border-right: 1px solid lightgrey;
   color: rgba(247, 247, 248, 1);
 }
@@ -45,7 +44,7 @@
   display: flex;
   flex-flow: column;
   box-sizing: border-box;
-  padding: 0px 0px 15px 0px;
+  padding: 0 0 10px 0;
 }
 
 :local(.chat button) {
@@ -62,48 +61,6 @@
   opacity: 1;
   cursor: pointer;
   transition: all .3s ease-in-out;
-}
-
-:local(.message) {
-  margin: 1vmin 15px;
-  display: flex;
-  flex-flow: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 70%;
-  transition: all .3s ease-in-out;
-}
-
-:local(.message div) {
-  max-width: 100%;
-}
-
-:local(.incoming) {
-  align-self: flex-end;
-}
-
-:local(.messageCloud) {
-  background: #fff;
-  color: grey;
-  width: auto;
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding: 1vmax;
-  word-wrap: break-word;
-  white-space: pre-line;
-  display: inline-flex;
-  align-items: baseline;
-}
-
-:local(.messageCloud .date) {
-  margin: 0 5px 0 10px;
-  font-size: 8pt;
-  color: lightgrey;
-}
-
-:local(.incomeMessage) {
-  background: purple;
 }
 
 :local(.inputarea) {

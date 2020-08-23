@@ -1,0 +1,44 @@
+:local(.message) {
+  margin: 1vmin 15px;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 70%;
+  transition: all .3s ease-in-out;
+}
+
+:local(.message:focus) {
+  outline: none;
+}
+
+:local(.incoming) {
+  align-self: flex-end;
+}
+
+:local(.messageCloud) {
+  background: #fff;
+  color: grey;
+  width: auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 1vmax;
+  word-wrap: break-word;
+  white-space: pre-line;
+  display: inline-flex;
+  align-items: baseline;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+:local(.messageCloud .info) {
+  margin: 0 5px 0 10px;
+  font-size: 8pt;
+  color: lightgrey;
+}
+
+:local(.selected) {
+  margin: 0 15px;
+  transition: all .3s ease-in-out;
+}

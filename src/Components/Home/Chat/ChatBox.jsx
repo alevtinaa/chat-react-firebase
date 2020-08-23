@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styles from '../Home.module.css';
 import firebase from '../../../firebase.js';
-import Message from './Message';
+import Messages from './Messages/Messages';
+import SelectedBar from './SelectedBar/SelectedBar';
 import Loader from '../../Loader/Loader';
 
 class ChatBox extends Component {
@@ -20,10 +21,13 @@ class ChatBox extends Component {
 
     this.previousScrollY = 0;
     this.previousScrollHeight = 0;
+    this.previousScrollTop = 0;
 
     this.state = {
       messages: [],
+      selectedMessages: [],
       _initMessagesAreLoading: false,
+      _scrollbarWidth: 0,
     };
   }
 
@@ -47,14 +51,19 @@ class ChatBox extends Component {
 
     const MORE_MESSAGES_LOADED = _prevMessagesCount
       && _currentMessagesCount
-      && _currentMessagesCount !== _prevMessagesCount;
+      && prevState.messages[0].messageKey !== this.state.messages[0].messageKey;
 
     const NEW_MESSAGE_LOADED = _prevMessagesCount
       && _currentMessagesCount
       && prevState.messages[_prevMessagesCount-1].messageKey !== this.state.messages[_currentMessagesCount-1].messageKey;
 
     if (INIT_MESSAGES_LOADED) {
-      this.scrollMessageIntoView(this.props.lastMessageRef.current, 'end', 'auto');
+      this.ref.current.scrollTop = this.ref.current.scrollHeight;
+      this.setState(
+        {
+          _scrollbarWidth: this.ref.current.offsetWidth - this.ref.current.clientWidth,
+        }
+      );
     }
 
     if (MORE_MESSAGES_LOADED) {
@@ -63,7 +72,7 @@ class ChatBox extends Component {
     }
 
     if (NEW_MESSAGE_LOADED) {
-      this.scrollMessageIntoView(this.props.lastMessageRef.current, 'end', 'smooth');
+      this.props.lastMessageRef.current && this.props.lastMessageRef.current.focus();
     }
 
   }
@@ -167,6 +176,26 @@ class ChatBox extends Component {
 
   }
 
+  selectMessages = messageKeys => {
+    this.setState(
+      prevState => (
+        {
+          selectedMessages: [...prevState.selectedMessages, ...messageKeys],
+        }
+      )
+    )
+  }
+
+  unselectMessages = messageKeys => {
+    this.setState(
+      prevState => (
+        {
+          selectedMessages: this.state.selectedMessages.filter(key => !messageKeys.includes(key)),
+        }
+      )
+    )
+  }
+
   scrollMessageIntoView = (message, block, behavior) => {
     message && message.scrollIntoView(
       {
@@ -188,6 +217,7 @@ class ChatBox extends Component {
     };
 
     this.previousScrollY = currentScrollY;
+    this.previousScrollTop = this.ref.current.scrollTop;
 
   }
 
@@ -200,10 +230,15 @@ class ChatBox extends Component {
 
     const {
       messages,
+      selectedMessages,
       _initMessagesAreLoading,
+      _scrollbarWidth,
     } = this.state;
 
-    const messagesCount = messages.length;
+    const actions = {
+      select: this.selectMessages,
+      unselect: this.unselectMessages,
+    };
 
     return (
       !_initMessagesAreLoading ?
@@ -213,18 +248,22 @@ class ChatBox extends Component {
         ref={chatBoxRef}
         onScroll={this.scrollHandler}
         >
-          {
-            messages.map(
-              (m, i, a) => (
-                <Message
-                  key={m.timestamp}
-                  type={m.senderId !== currentUserId ? 'incoming' : 'outgoing'}
-                  messageRef={i+1 === messagesCount ? lastMessageRef : null}
-                  {...m}
-                  />
-                )
-              )
-          }
+
+          <Messages
+            messages={messages}
+            selectedMessages={selectedMessages}
+            lastMessageRef={lastMessageRef}
+            actions={actions}
+            currentUserId={currentUserId}
+            />
+
+          <SelectedBar
+            chatQuery={this.getChatQuery()}
+            scrollbarWidth={_scrollbarWidth}
+            selectedMessages={selectedMessages}
+            actions={actions}
+            />
+
       </div>
 
       :
