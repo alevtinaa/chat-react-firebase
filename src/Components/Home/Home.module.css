@@ -35,6 +35,15 @@
   cursor: pointer;
 }
 
+:local(.chatlist div:hover) {
+  text-decoration: underline;
+}
+
+:local(.currentChat) {
+  text-decoration: underline;
+  color: #3378a3;
+}
+
 :local(.chat) {
   grid-area: chat;
   width: 100%;
@@ -61,41 +70,4 @@
   opacity: 1;
   cursor: pointer;
   transition: all .3s ease-in-out;
-}
-
-:local(.inputarea) {
-  height: 100%;
-  display: inline-grid;
-  grid-template-columns: 2fr 0.5fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: 'input send';
-  grid-area: inputarea;
-  border-top: 1px solid lightgrey;
-}
-
-:local(.input) {
-  grid-area: input;
-}
-
-:local(.input textarea) {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  resize: none;
-  border: none;
-}
-
-:local(.send) {
-  grid-area: send;
-  border-left: 1px solid lightgrey;
-}
-
-:local(.sendMessageButton) {
-  background: rgba(255,255,255,.2);
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-  cursor: pointer;
 }

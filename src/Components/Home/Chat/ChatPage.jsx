@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import styles from '../Home.module.css';
 import ChatBox from './ChatBox';
-import MessageInput from './MessageInput';
+import MessageInput from './MessageInput/MessageInput';
 import Loader from '../../Loader/Loader';
 
 class ChatPage extends Component {

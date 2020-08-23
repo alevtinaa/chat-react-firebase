@@ -18,13 +18,15 @@
 }
 
 :local(.messageCloud) {
+  min-width: 15%;
+  max-width: 100%;
   background: #fff;
   color: grey;
   width: auto;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 1vmax;
-  word-wrap: break-word;
+  word-break: break-all;
   white-space: pre-line;
   display: inline-flex;
   align-items: baseline;
@@ -33,7 +35,11 @@
 }
 
 :local(.messageCloud .info) {
-  margin: 0 5px 0 10px;
+  word-break: normal;
+  margin-rigth: 0;
+  margin-left: auto;
+  padding: 0 5px;
+  box-sizing: border-box;
   font-size: 8pt;
   color: lightgrey;
 }

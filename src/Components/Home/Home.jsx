@@ -63,6 +63,7 @@ class Home extends Component {
               currentUser={this.props.currentUser}
               />
             <Chatlist
+              currentReceiverId={this.state.receiverUser && this.state.receiverUser.uid}
               setReceiverById={this.setReceiverById}
               />
         {

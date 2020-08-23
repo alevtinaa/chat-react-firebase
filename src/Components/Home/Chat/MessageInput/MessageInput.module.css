@@ -1,0 +1,38 @@
+:local(.inputarea) {
+  height: 100%;
+  display: inline-grid;
+  grid-template-columns: 3fr 0.3fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'input send';
+  grid-area: inputarea;
+  border-top: 1px solid lightgrey;
+}
+
+:local(.input) {
+  grid-area: input;
+}
+
+:local(.input textarea) {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  resize: none;
+  border: none;
+  padding: 5px 10px 10px;
+  box-sizing: border-box;
+}
+
+:local(.send) {
+  grid-area: send;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+:local(.sendMessageButton) {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

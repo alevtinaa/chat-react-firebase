@@ -22,11 +22,11 @@ class Chatlist extends Component {
           }
         )
       };
-      this.setState(
-        {
-          users
-        }
-      );
+        this.setState(
+          {
+            users
+          }
+        );
       }
     )
   }
@@ -39,6 +39,7 @@ class Chatlist extends Component {
           {
             this.state.users.map(user => <div
                 key={user.uid}
+                className={this.props.currentReceiverId == user.uid ? styles.currentChat : ''}
                 onClick={
                   () => this.props.setReceiverById(user.uid)
                 }

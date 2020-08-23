@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import styles from '../Home.module.css';
-import firebase from '../../../firebase.js';
+import styles from './MessageInput.module.css';
+import firebase from '../../../../firebase.js';
+import SendButton from './send-button.png';
 
 class MessageInput extends Component {
   constructor(props) {
@@ -73,8 +74,12 @@ class MessageInput extends Component {
             >
               <button
                 className={styles.sendMessageButton}
-                children='send'
-                />
+                >
+                  <img
+                    alt=''
+                    src={SendButton}
+                    />
+              </button>
           </div>
 
         </form>
