@@ -7,20 +7,6 @@
   overflow: hidden;
 }
 
-:local(.navbar) {
-  grid-area: navbar;
-  box-sizing: border-box;
-  padding: 15px;
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  background: #3378a3;
-  border-right: 1px solid lightgrey;
-  color: rgba(247, 247, 248, 1);
-}
-
 :local(.chatlist) {
   grid-area: chatlist;
   background: rgba(252, 255, 255, 1);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './Home.module.css';
 import firebase from '../../firebase';
 import Loader from '../Loader/Loader'
-import Navbar from './Navbar';
+import Navbar from './Navbar/Navbar';
 import Chatlist from './Chat/Chatlist';
 import ChatPage from './Chat/ChatPage';
 
@@ -50,6 +50,14 @@ class Home extends Component {
 
   }
 
+  setSearchResults = searchResults => {
+    this.setState(
+      {
+        searchResults,
+      }
+    )
+  }
+
   render() {
     return (
       this.props.currentUser ? (
@@ -61,10 +69,12 @@ class Home extends Component {
             <Navbar
               history={this.props.history}
               currentUser={this.props.currentUser}
+              setSearchResults={this.setSearchResults}
               />
             <Chatlist
               currentReceiverId={this.state.receiverUser && this.state.receiverUser.uid}
               setReceiverById={this.setReceiverById}
+              searchResults={this.state.searchResults}
               />
         {
           this.state.currentChatId &&

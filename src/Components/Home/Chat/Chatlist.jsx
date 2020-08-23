@@ -11,24 +11,39 @@ class Chatlist extends Component {
   }
 
   componentDidMount() {
-    const usersDatabase = firebase.database().ref('users');
-    usersDatabase.on('value', snapshot => {
-      const snap = snapshot.val();
-      const users = [];
-      for (let user in snap) {
-        users.push(
-          {
-            ...snap[user]
-          }
-        )
-      };
+    const usersDatabase = firebase.database().ref('users').limitToLast(25);
+    this.getChatlist(usersDatabase);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      searchResults,
+    } = this.props;
+
+    if (searchResults !== prevProps.searchResults) {
+      const usersDatabase = searchResults || firebase.database().ref('users').limitToLast(25);
+      this.getChatlist(usersDatabase);
+    }
+  }
+
+  getChatlist = usersDatabase => {
+    usersDatabase.once('value', snapshot => {
+        const snap = snapshot.val();
+        const users = [];
+        for (let user in snap) {
+          users.push(
+            {
+              ...snap[user]
+            }
+          )
+        };
         this.setState(
-          {
-            users
-          }
-        );
-      }
-    )
+            {
+              users
+            }
+          );
+        }
+      )
   }
 
   render() {

@@ -1,0 +1,41 @@
+:local(.navbar) {
+  grid-area: navbar;
+  box-sizing: border-box;
+  padding: 15px;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  background: #3378a3;
+  border-right: 1px solid lightgrey;
+  color: rgba(247, 247, 248, 1);
+}
+
+:local(.navbar span) {
+  margin: 0 1vmin 0 0;
+}
+
+:local(.navbar img) {
+  cursor: pointer;
+  margin-right: 0;
+}
+
+:local(.navbar input) {
+  height: 25px;
+  border-radius: 25px;
+  margin-right: 1vmin;
+  margin-left: auto;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  padding: 0 25px;
+  width: 20%;
+  transition: all .2s ease-out;
+}
+
+:local(.navbar input:focus) {
+  outline: none;
+  flex-grow: 1;
+  padding: 0 10px;
+  transition: all .2s ease-in-out;
+}
