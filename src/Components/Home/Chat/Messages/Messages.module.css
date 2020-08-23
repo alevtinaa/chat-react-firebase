@@ -1,5 +1,5 @@
 :local(.message) {
-  margin: 1vmin 15px;
+  margin: 2vmin 15px;
   display: flex;
   flex-flow: row;
   flex-wrap: nowrap;
@@ -47,4 +47,14 @@
 :local(.selected) {
   margin: 0 15px;
   transition: all .3s ease-in-out;
+}
+
+:local(.dateString) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #789B96;
+  border-bottom: 1px solid #A1B9B1;
+  width: 100%;
+  margin: 0 0 1vmax 0;
 }

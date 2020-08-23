@@ -30,6 +30,7 @@ class Messages extends Component {
                 actions={actions}
                 isSelected={selectedMessages.includes(m.messageKey)}
                 tabIndex={i+1 === messagesCount ? 1 : 0}
+                isNewDate={a[i-1] && m.timestamp - a[i-1].timestamp > 86400000}
                 {...m}
                 />
               )

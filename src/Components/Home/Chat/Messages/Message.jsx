@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Messages.module.css';
 import Selected from './selected.png';
+import DateString from './DateString';
 
 class Message extends Component {
   constructor(props) {
@@ -25,6 +26,12 @@ class Message extends Component {
     const {...message} = this.props;
 
     return (
+      <>
+        {
+          message.isNewDate && <DateString
+            date={this.date}
+            />
+        }
       <div
         className={`${styles.message} ${styles[message.type]}`}
         ref={message.messageRef}
@@ -72,6 +79,8 @@ class Message extends Component {
           </div>
 
       </div>
+
+      </>
     )
   }
 };
