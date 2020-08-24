@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from '../Home.module.css';
 import firebase from '../../../firebase.js';
 import Messages from './Messages/Messages';
+import MessageInput from './MessageInput/MessageInput';
 import SelectedBar from './SelectedBar/SelectedBar';
 import Loader from '../../Loader/Loader';
 
@@ -26,6 +27,7 @@ class ChatBox extends Component {
     this.state = {
       messages: [],
       selectedMessages: [],
+      editedMessageKey: null,
       _initMessagesAreLoading: false,
       _scrollbarWidth: 0,
     };
@@ -191,8 +193,17 @@ class ChatBox extends Component {
       prevState => (
         {
           selectedMessages: this.state.selectedMessages.filter(key => !messageKeys.includes(key)),
+          editedMessageKey: null,
         }
       )
+    )
+  }
+
+  editMessage = messageKey => {
+    this.setState(
+      {
+        editedMessageKey: messageKey,
+      }
     )
   }
 
@@ -224,6 +235,8 @@ class ChatBox extends Component {
   render() {
     const {
       currentUserId,
+      receiverId,
+      currentChatId,
       lastMessageRef,
       chatBoxRef,
     } = this.props;
@@ -231,6 +244,7 @@ class ChatBox extends Component {
     const {
       messages,
       selectedMessages,
+      editedMessageKey,
       _initMessagesAreLoading,
       _scrollbarWidth,
     } = this.state;
@@ -238,10 +252,15 @@ class ChatBox extends Component {
     const actions = {
       select: this.selectMessages,
       unselect: this.unselectMessages,
+      edit: this.editMessage,
     };
+
+    const editedMessage = messages.find(m => editedMessageKey === m.messageKey);
 
     return (
       !_initMessagesAreLoading ?
+
+      <>
 
       <div
         className={styles.chat}
@@ -265,6 +284,16 @@ class ChatBox extends Component {
             />
 
       </div>
+
+      <MessageInput
+        currentChatId={currentChatId}
+        senderId={currentUserId}
+        receiverId={receiverId}
+        editMessage={this.editMessage}
+        editedMessage={editedMessage}
+        />
+
+      </>
 
       :
 

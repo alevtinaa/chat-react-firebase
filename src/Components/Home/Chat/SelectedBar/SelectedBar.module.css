@@ -22,3 +22,8 @@
   color: rgba(247, 247, 248, 1);
   margin: 0 0 0 1vmax;
 }
+
+:local(.disabled) {
+  cursor: default;
+  opacity: .6;
+}

@@ -72,6 +72,7 @@ class Home extends Component {
               setSearchResults={this.setSearchResults}
               />
             <Chatlist
+              currentUserId={this.props.currentUser && this.props.currentUser.uid}
               currentReceiverId={this.state.receiverUser && this.state.receiverUser.uid}
               setReceiverById={this.setReceiverById}
               searchResults={this.state.searchResults}

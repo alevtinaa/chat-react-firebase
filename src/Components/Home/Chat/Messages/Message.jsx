@@ -55,7 +55,6 @@ class Message extends Component {
           <div
             className={`${styles.messageCloud} ${message.isSelected ? styles.selected : ''}`}
             onClick={this.clickHandler}
-            onDoubleClick={this.doubleClickHandler}
             >
 
               <span
@@ -69,7 +68,7 @@ class Message extends Component {
                 className={styles.info}
                 >
                   {
-                    message.isEdited && ` edited`
+                    message.editedAt && ` edited `
                   }
                   {
                     `${this.date.getHours()}:${this.date.getMinutes()}`

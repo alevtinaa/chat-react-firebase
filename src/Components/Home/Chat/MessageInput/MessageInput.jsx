@@ -11,6 +11,27 @@ class MessageInput extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      editedMessage,
+    } = this.props;
+
+    if (editedMessage && (!prevProps.editedMessage || editedMessage.messageKey !== prevProps.editedMessage.messageKey)) {
+      this.setState(
+        {
+          messageText: editedMessage.messageText,
+        }
+      );
+    }
+    if (!editedMessage && prevProps.editedMessage) {
+      this.setState(
+        {
+          messageText: '',
+        }
+      );
+    }
+  }
+
   changeHandler = e => {
     this.setState(
       {
@@ -24,10 +45,29 @@ class MessageInput extends Component {
       currentChatId,
       senderId,
       receiverId,
+      editedMessage,
+      editMessage,
     } = this.props;
 
     e.preventDefault();
     if (this.state.messageText.trim()) {
+
+      if (editedMessage) {
+
+        const messsageDatabase = firebase.database().ref(`chats/${currentChatId}`).child(editedMessage.messageKey);
+
+        const message = {
+            messageText: this.state.messageText,
+            editedAt: new Date().getTime(),
+          };
+
+        message.messageText !== editedMessage.messageText && messsageDatabase.update(message);
+
+        editMessage('');
+
+      }
+
+      if (!editedMessage) {
 
       const chatsDatabase = firebase.database().ref('chats').child(currentChatId);
 
@@ -42,13 +82,16 @@ class MessageInput extends Component {
 
       chatsDatabase.push(message);
 
+      }
+
       this.setState(
           {
             messageText: '',
           }
         );
-      }
+
     }
+  }
 
   render() {
     return (

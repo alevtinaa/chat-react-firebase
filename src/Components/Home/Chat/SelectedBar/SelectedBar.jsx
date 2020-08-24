@@ -44,6 +44,7 @@ class SelectedBar extends Component {
     const {
       scrollbarWidth,
       selectedMessages,
+      actions,
     } = this.props;
 
     const {
@@ -79,9 +80,18 @@ class SelectedBar extends Component {
               className={styles.link}
               >
                 {
-                  ` delete`
+                  `delete`
                 }
             </span>
+
+            <span
+              onClick={() => actions.edit(selectedMessages[0])}
+              className={`${styles.link} ${selectedMessages.length === 1 ? '' : styles.disabled}`}
+              >
+                {
+                  `edit`
+                }
+              </span>
 
             <span
               onClick={() => false}
